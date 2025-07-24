@@ -1,93 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Frutas con Vue 3</title>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
->
-<style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
     button {
-        margin: 0.5rem 0;
+      margin: 0.5rem 0;
     }
-</style>
+  </style>
 </head>
+
 <body>
   <div class="container" id="app">
     <h1>Lista de frutas</h1>
 
     <ul>
-      <li v-for="(fruta, index) in frutas" :key="index">
-        {{ fruta.emoji }} {{ fruta.name }}
-      </li>
+      <!-- Aquí irá la lista de frutas -->
     </ul>
 
-    <p>Total de frutas: {{ frutas.length }}</p>
+    <p>Total de frutas: <!-- total aquí --></p>
 
     <label for="nuevaFruta">Añadir fruta: </label>
-    <select v-model="frutaSeleccionada">
-      <option disabled value="">Selecciona una fruta</option>
-      <option 
-        v-for="(fruta, index) in frutasDisponibles" 
-        :key="index" 
-        :value="fruta"
-      >
-        {{ fruta.emoji }} {{ fruta.name }}
-      </option>
+    <select>
+      <option disabled selected>Selecciona una fruta</option>
+      <!-- Opciones de frutas aquí -->
     </select>
-    <button @click="añadirFruta" :disabled="!frutaSeleccionada">Añadir</button>
+    <button>Añadir</button>
 
     <br>
-    <button @click="eliminarUltima" :disabled="frutas.length === 0">
-      Eliminar última fruta
-    </button>
+    <button>Eliminar última fruta</button>
   </div>
 
   <script>
-    const { createApp, ref } = Vue;
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+    
+    const frutasDisponibles = ref([
+      { name: 'Manzana', emoji: '🍎' },
+      { name: 'Banana', emoji: '🍌' },
+      { name: 'Pera', emoji: '🍐' },
+      { name: 'Fresa', emoji: '🍓' },
+      { name: 'Cereza', emoji: '🍒' },
+      { name: 'Piña', emoji: '🍍' },
+      { name: 'Melón', emoji: '🍈' },
+      { name: 'Uva', emoji: '🍇' },
+      { name: 'Sandía', emoji: '🍉' },
+      { name: 'Kiwi', emoji: '🥝' }
 
-    createApp({
-      setup() {
-        const frutas = ref([
-          { name: 'Manzana', emoji: '🍎' },
-          { name: 'Banana', emoji: '🍌' },
-          { name: 'Pera', emoji: '🍐' },
-          { name: 'Fresa', emoji: '🍓' },
-          { name: 'Cereza', emoji: '🍒' }
-        ]);
+    ]);
 
-        const frutasDisponibles = [
-          { name: 'Piña', emoji: '🍍' },
-          { name: 'Melón', emoji: '🍈' },
-          { name: 'Uva', emoji: '🍇' },
-          { name: 'Sandía', emoji: '🍉' },
-          { name: 'Kiwi', emoji: '🥝' }
-        ];
 
-        const frutaSeleccionada = ref('');
 
-        function añadirFruta() {
-          if (frutaSeleccionada.value) {
-            frutas.value.push(frutaSeleccionada.value);
-            frutaSeleccionada.value = '';
-          }
-        }
-
-        function eliminarUltima() {
-          frutas.value.pop();
-        }
-
-        return {
-          frutas,
-          frutasDisponibles,
-          frutaSeleccionada,
-          añadirFruta,
-          eliminarUltima
-        };
-      }
-    }).mount('#app');
   </script>
 </body>
+
 </html>

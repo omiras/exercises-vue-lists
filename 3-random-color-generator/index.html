@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Random Color Generator</title>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <style>
     body {
       margin: 0;
@@ -24,7 +24,7 @@
     .color-container {
       width: 300px;
       height: 150px;
-      color: white;
+      color: black;
       margin: 5px;
       display: flex;
       justify-content: center;
@@ -47,47 +47,41 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <h1>Random Color Generator</h1>
     <div class="center">
-      <button @click="addColor">Add Color</button>
+      <button>Add Color</button>
     </div>
     <div class="container">
-      <div
-        class="color-container"
-        v-for="(color, index) in colors"
-        :key="index"
-        :style="{ backgroundColor: color }"
-      >
-        {{ color }}
+      <!-- Puedes usar tu directva v-for aquí -->
+      <div class="color-container">
       </div>
     </div>
   </div>
 
-  <script>
-    const { createApp, ref } = Vue;
+  <script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+    const generateHexColor = () => {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    };
+
 
     createApp({
       setup() {
-        const colors = ref([]);
 
-        const generateHexColor = () => {
-          const letters = '0123456789ABCDEF';
-          let color = '#';
-          for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-          return color;
-        };
 
-        const addColor = () => {
-          colors.value.push(generateHexColor());
-        };
-
-        return { colors, addColor };
+        return {};
       },
     }).mount('#app');
   </script>
 </body>
+
 </html>

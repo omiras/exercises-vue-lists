@@ -18,13 +18,15 @@
     <button @click="clearHistory" id="clear-button" class="red">Clear History</button>
 
     <ul id="roll-history">
-     <li v-for="(r, index ) in history">En la tirada {{index + 1}} Ha salido el número {{r}}</li>
+     <li>En la tirada X Ha salido el número Y</li>
     </ul>
   </main>
   <script type="module">
     import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-    
+    const getRandomDiceNumber = () => {
+      return Math.floor(Math.random() * 6) + 1
+    }
 
     createApp({
       setup() {
@@ -32,13 +34,12 @@
         const history = ref([])
 
         const roll = () => {
-          dice.value = Math.floor(Math.random() * 6) + 1
-          history.value.push(dice.value)
+          // Implementame, por favor!
         }
 
         const clearHistory = () => {
-          history.value = []
-          dice.value = ''
+          // Falta codificar !!
+          
         }
         return {
           dice,
