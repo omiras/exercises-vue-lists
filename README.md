@@ -3,6 +3,8 @@
 
 Abre con Live Server cada uno de los ficheros index.html del ejercicio a ralizar
 
+OS adjunto un [vídeo](https://oscarm.tinytake.com/df/1793fea/thumbnail?type=attachments&version_no=0&file_version_no=0&thumbnail_size=preview) con una explicación y muestra de las funcionalidades deseadas
+
 ## ¿Algo va mal?
 
 
