@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Color Generator</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: cursive;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .color-container {
+      width: 300px;
+      height: 150px;
+      color: white;
+      margin: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      border: solid black 2px;
+      border-radius: 10px;
+    }
+
+    .center {
+      text-align: center;
+      margin: 20px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Random Color Generator</h1>
+    <div class="center">
+      <button @click="addColor">Add Color</button>
+    </div>
+    <div class="container">
+      <div
+        class="color-container"
+        v-for="(color, index) in colors"
+        :key="index"
+        :style="{ backgroundColor: color }"
+      >
+        {{ color }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const colors = ref([]);
+
+        const generateHexColor = () => {
+          const letters = '0123456789ABCDEF';
+          let color = '#';
+          for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        };
+
+        const addColor = () => {
+          colors.value.push(generateHexColor());
+        };
+
+        return { colors, addColor };
+      },
+    }).mount('#app');
+  </script>
+</body>
+</html>

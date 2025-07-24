@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dice Roll Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main id="app">
+    <h1>Dice Roll Simulator</h1>
+    <div class="dice" id="dice">{{dice}}</div>
+
+    <button @click="roll" id="roll-button">Roll Dice</button>
+    <button @click="clearHistory" id="clear-button" class="red">Clear History</button>
+
+    <ul id="roll-history">
+     <li v-for="(r, index ) in history">En la tirada {{index + 1}} Ha salido el número {{r}}</li>
+    </ul>
+  </main>
+  <script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+    
+
+    createApp({
+      setup() {
+        const dice = ref('')
+        const history = ref([])
+
+        const roll = () => {
+          dice.value = Math.floor(Math.random() * 6) + 1
+          history.value.push(dice.value)
+        }
+
+        const clearHistory = () => {
+          history.value = []
+          dice.value = ''
+        }
+        return {
+          dice,
+          roll,
+          history,
+          clearHistory
+        }
+      }
+    }).mount('#app')
+  </script>
+
+
+<style>
+  #roll-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-right: 0.5em;
+  }
+  #clear-button.red {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+</style>
+</body>
+
+</html>
