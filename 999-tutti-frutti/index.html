@@ -1,93 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Frutas con Vue 3</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
->
-<style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
     button {
-        margin: 0.5rem 0;
+      margin: 0.5rem 0;
     }
-</style>
+  </style>
 </head>
+
 <body>
   <div class="container" id="app">
     <h1>Lista de frutas</h1>
 
     <ul>
-      <li v-for="(fruta, index) in frutas" :key="index">
-        {{ fruta.emoji }} {{ fruta.name }}
+      <li v-for="(fruit, index) in fruits" :key="index">
+        {{ fruit.emoji }} {{ fruit.name }}
       </li>
     </ul>
 
-    <p>Total de frutas: {{ frutas.length }}</p>
+    <p>Total fruits: {{ fruits.length }}</p>
 
-    <label for="nuevaFruta">Añadir fruta: </label>
-    <select v-model="frutaSeleccionada">
-      <option disabled value="">Selecciona una fruta</option>
-      <option 
-        v-for="(fruta, index) in frutasDisponibles" 
-        :key="index" 
-        :value="fruta"
-      >
-        {{ fruta.emoji }} {{ fruta.name }}
+    <label for="newFruit">Add fruit: </label>
+    <select v-model="selectedFruit">
+      <option disabled value="">Select a fruit</option>
+      <option v-for="(fruit, index) in availableFruits" :key="index" :value="fruit">
+        {{ fruit.emoji }} {{ fruit.name }}
       </option>
     </select>
-    <button @click="añadirFruta" :disabled="!frutaSeleccionada">Añadir</button>
+    <button @click="addFruit" :disabled="!selectedFruit">Add</button>
 
     <br>
-    <button @click="eliminarUltima" :disabled="frutas.length === 0">
-      Eliminar última fruta
+    <button @click="removeLastFruit" :disabled="fruits.length === 0">
+      Remove last fruit
     </button>
   </div>
 
   <script>
     const { createApp, ref } = Vue;
 
+    const availableFruits = [
+      { name: 'Pineapple', emoji: '🍍' },
+      { name: 'Melon', emoji: '🍈' },
+      { name: 'Grape', emoji: '🍇' },
+      { name: 'Watermelon', emoji: '🍉' },
+      { name: 'Kiwi', emoji: '🥝' },
+      { name: 'Apple', emoji: '🍎' },
+      { name: 'Banana', emoji: '🍌' },
+      { name: 'Pear', emoji: '🍐' },
+      { name: 'Strawberry', emoji: '🍓' },
+      { name: 'Cherry', emoji: '🍒' }
+
+    ];
+
     createApp({
       setup() {
-        const frutas = ref([
-          { name: 'Manzana', emoji: '🍎' },
+        const fruits = ref([
+          { name: 'Apple', emoji: '🍎' },
           { name: 'Banana', emoji: '🍌' },
-          { name: 'Pera', emoji: '🍐' },
-          { name: 'Fresa', emoji: '🍓' },
-          { name: 'Cereza', emoji: '🍒' }
+          { name: 'Pear', emoji: '🍐' },
+          { name: 'Strawberry', emoji: '🍓' },
+          { name: 'Cherry', emoji: '🍒' }
         ]);
 
-        const frutasDisponibles = [
-          { name: 'Piña', emoji: '🍍' },
-          { name: 'Melón', emoji: '🍈' },
-          { name: 'Uva', emoji: '🍇' },
-          { name: 'Sandía', emoji: '🍉' },
-          { name: 'Kiwi', emoji: '🥝' }
-        ];
 
-        const frutaSeleccionada = ref('');
+        const selectedFruit = ref('');
 
-        function añadirFruta() {
-          if (frutaSeleccionada.value) {
-            frutas.value.push(frutaSeleccionada.value);
-            frutaSeleccionada.value = '';
+        function addFruit() {
+          if (selectedFruit.value) {
+            fruits.value.push(selectedFruit.value);
+            selectedFruit.value = '';
           }
         }
 
-        function eliminarUltima() {
-          frutas.value.pop();
+        function removeLastFruit() {
+          fruits.value.pop();
         }
 
         return {
-          frutas,
-          frutasDisponibles,
-          frutaSeleccionada,
-          añadirFruta,
-          eliminarUltima
+          fruits,
+          availableFruits,
+          selectedFruit,
+          addFruit,
+          removeLastFruit
         };
       }
     }).mount('#app');
   </script>
 </body>
+
 </html>
