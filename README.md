@@ -1,4 +1,4 @@
-# Ejercicios con forumularios y Vue
+# Ejercicios con Listas, CSS dinámico y Vue
 
 
 Abre con Live Server cada uno de los ficheros index.html del ejercicio a ralizar
